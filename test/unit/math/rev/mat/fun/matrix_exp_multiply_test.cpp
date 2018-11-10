@@ -80,11 +80,11 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
       = stan::math::multiply(stan::math::matrix_exp(Av), B);
 
   // matrix_exp_multiply
-  Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
+  /*Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
   EXPECT_EQ(res_vd.size(), expAB.size());
   for (int l = 0; l < res_vd.size(); ++l) {
     EXPECT_FLOAT_EQ(res_vd(l).val(), expAB(l).val());
-  }
+    }*/
   // compare adjoints
   std::vector<double> g, g0;
   // for (int l = 0; l < M; ++l) {
