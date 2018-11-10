@@ -76,12 +76,12 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   Eigen::MatrixXd B = value_of(Bv);
 
   // brute force
-  Eigen::Matrix<var, -1, -1> expAB
-      = stan::math::multiply(stan::math::matrix_exp(Av), B);
+  //Eigen::Matrix<var, -1, -1> expAB
+  //= stan::math::multiply(stan::math::matrix_exp(Av), B);
 
   // matrix_exp_multiply
-  /*Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
-  EXPECT_EQ(res_vd.size(), expAB.size());
+  Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
+  /*EXPECT_EQ(res_vd.size(), expAB.size());
   for (int l = 0; l < res_vd.size(); ++l) {
     EXPECT_FLOAT_EQ(res_vd(l).val(), expAB(l).val());
     }*/
@@ -98,8 +98,8 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   //     }
   //   }
   // }
-  //res_vd(0, 0).grad(Avec, g);
-  expAB(0, 0).grad(Avec, g0);
+  res_vd(0, 0).grad(Avec, g);
+  //expAB(0, 0).grad(Avec, g0);
   //for (size_t j = 0; j < g.size(); ++j) {
   //EXPECT_FLOAT_EQ(g[j], g0[j]);
   //}
