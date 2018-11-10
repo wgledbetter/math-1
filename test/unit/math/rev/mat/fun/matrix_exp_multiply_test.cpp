@@ -70,14 +70,17 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   std::srand(1999);
 
   Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
-  Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
-  std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
-  std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
-  Eigen::MatrixXd B = value_of(Bv);
+  //Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
+  //std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
+  //std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
+  Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
 
   // brute force
   //Eigen::Matrix<var, -1, -1> expAB
   //= stan::math::multiply(stan::math::matrix_exp(Av), B);
+
+  std::cout << "stack size: " << stan::math::ChainableStack::instance().var_stack_.size()
+            << std::endl;
 
   // matrix_exp_multiply
   Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
