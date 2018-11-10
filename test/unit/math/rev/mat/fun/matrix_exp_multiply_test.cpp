@@ -6,7 +6,7 @@
 #include <stan/math/rev/mat/fun/matrix_exp_multiply.hpp>
 #include <stan/math/rev/mat/fun/to_var.hpp>
 #include <vector>
-
+/*
 inline void test_matrix_exp_multiply_dv(int N, int M) {
   using stan::math::value_of;
   using stan::math::var;
@@ -62,7 +62,7 @@ TEST(MathMatrix, matrix_exp_multiply_dv) {
   test_matrix_exp_multiply_dv(5, 1);
   test_matrix_exp_multiply_dv(5, 5);
 }
-
+*/
 inline void test_matrix_exp_multiply_vd(int N, int M) {
   using stan::math::value_of;
   using stan::math::var;
@@ -118,7 +118,7 @@ TEST(MathMatrix, matrix_exp_multiply_vd) {
   test_matrix_exp_multiply_vd(5, 1);
   test_matrix_exp_multiply_vd(5, 5);
 }
-
+/*
 inline void test_matrix_exp_multiply_vv(int N, int M) {
   using stan::math::value_of;
   using stan::math::var;
@@ -246,3 +246,4 @@ TEST(MathMatrix, matrix_exp_multiply_exception) {
 //     std::cout << elapsed_seconds.count() << "\n";
 //   }
 // }
+*/
