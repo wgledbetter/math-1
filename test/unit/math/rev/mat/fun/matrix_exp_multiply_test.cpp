@@ -75,6 +75,7 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
   std::cout << "stack size after Av (" << N << ", " << N << "): " << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
+  std::cout << "Av = " << Av << std::endl;
   //Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
   std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
   std::cout << "stack size after Avec: " << stan::math::ChainableStack::instance().var_stack_.size()
