@@ -120,9 +120,9 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
 TEST(MathMatrix, matrix_exp_multiply_vd) {
   test_matrix_exp_multiply_vd(1, 1);
-  test_matrix_exp_multiply_vd(1, 5);
-  test_matrix_exp_multiply_vd(5, 1);
-  test_matrix_exp_multiply_vd(5, 5);
+  // test_matrix_exp_multiply_vd(1, 5);
+  // test_matrix_exp_multiply_vd(5, 1);
+  // test_matrix_exp_multiply_vd(5, 5);
 }
 /*
 inline void test_matrix_exp_multiply_vv(int N, int M) {
