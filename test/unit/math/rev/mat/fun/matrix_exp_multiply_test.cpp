@@ -69,12 +69,20 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
   std::srand(1999);
 
+  std::cout << "stack size at start: " << stan::math::ChainableStack::instance().var_stack_.size()
+            << std::endl;
+
   Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
+  std::cout << "stack size after Av (" << N << ", " << N << "): " << stan::math::ChainableStack::instance().var_stack_.size()
+            << std::endl;
   //Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
   std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
+  std::cout << "stack size after Avec: " << stan::math::ChainableStack::instance().var_stack_.size()
+            << std::endl;
   //std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
   Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
-
+  std::cout << "stack size after B: " << stan::math::ChainableStack::instance().var_stack_.size()
+            << std::endl;
   // brute force
   //Eigen::Matrix<var, -1, -1> expAB
   //= stan::math::multiply(stan::math::matrix_exp(Av), B);
@@ -84,10 +92,11 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
   // matrix_exp_multiply
   Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
-  std::cout << "stack size: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size after res_vd: " << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
-  /*EXPECT_EQ(res_vd.size(), expAB.size());
-  for (int l = 0; l < res_vd.size(); ++l) {
+  /*
+    EXPECT_FLOAT_EQ(res_vd.size(), expAB.size());
+    for (int l = 0; l < res_vd.size(); ++l) {
     EXPECT_FLOAT_EQ(res_vd(l).val(), expAB(l).val());
     }*/
   // compare adjoints
@@ -125,7 +134,7 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
 TEST(MathMatrix, matrix_exp_multiply_vd) {
   //test_matrix_exp_multiply_vd(1, 1);
-  // test_matrix_exp_multiply_vd(1, 5);
+  // test_matrix_exp_multiply_vd(1, );
   // test_matrix_exp_multiply_vd(5, 1);
   test_matrix_exp_multiply_vd(5, 5);
 }
