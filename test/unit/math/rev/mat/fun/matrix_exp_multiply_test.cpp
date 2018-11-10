@@ -85,7 +85,6 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   for (int l = 0; l < res_vd.size(); ++l) {
     EXPECT_FLOAT_EQ(res_vd(l).val(), expAB(l).val());
   }
-
   // compare adjoints
   std::vector<double> g, g0;
   // for (int l = 0; l < M; ++l) {
@@ -99,8 +98,8 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   //     }
   //   }
   // }
-  res_vd(0, 0).grad(Avec, g);
-  //expAB(k, l).grad(Avec, g0);
+  //res_vd(0, 0).grad(Avec, g);
+  expAB(0, 0).grad(Avec, g0);
   //for (size_t j = 0; j < g.size(); ++j) {
   //EXPECT_FLOAT_EQ(g[j], g0[j]);
   //}
