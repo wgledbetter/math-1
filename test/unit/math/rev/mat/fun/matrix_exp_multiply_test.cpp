@@ -86,7 +86,6 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
     EXPECT_FLOAT_EQ(res_vd(l).val(), expAB(l).val());
   }
 
-  /*
   // compare adjoints
   std::vector<double> g, g0;
   // for (int l = 0; l < M; ++l) {
@@ -106,7 +105,7 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   //EXPECT_FLOAT_EQ(g[j], g0[j]);
   //}
 
-
+  /*
   // test a single function of expA*B
   var f = sum(res_vd);
   var f0 = sum(expAB);
