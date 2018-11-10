@@ -71,7 +71,7 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
   Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
   //Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
-  //std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
+  std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
   //std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
   Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
 
