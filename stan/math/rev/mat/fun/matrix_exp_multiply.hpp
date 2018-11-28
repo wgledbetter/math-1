@@ -13,6 +13,7 @@
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits.hpp>
 #include <vector>
+#include <iostream>
 
 namespace stan {
 namespace math {
@@ -137,6 +138,7 @@ class matrix_exp_action_vari : public vari {
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)),
         variRefexpAB_(
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)) {
+    std::cout << "***************************" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
     for (size_type i = 0; i < A.size(); ++i) {
@@ -330,6 +332,9 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
             ChainableStack::instance().memalloc_.alloc_array<vari*>(A_size_)),
         variRefexpAB_(
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)) {
+    std::cout << "*************************** this is the right one"
+              << std::endl;
+
     using Eigen::Map;
     using Eigen::MatrixXd;
     for (size_type i = 0; i < A.size(); ++i) {
@@ -347,6 +352,7 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
   }
 
   virtual void chain() {
+    std::cout << "--------------------------- chain" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
     MatrixXd adjexpAB(n_, B_cols_);
@@ -380,6 +386,7 @@ inline typename boost::enable_if_c<boost::is_same<Ta, var>::value
                                    Eigen::Matrix<var, N, Cb> >::type
 matrix_exp_action(const Eigen::Matrix<Ta, N, N>& A,
                   const Eigen::Matrix<Tb, N, Cb>& B, const double& t = 1.0) {
+  std::cout << "+++++++++++++++++++++++++++++++" << std::endl;
   matrix_exp_action_vari<Ta, N, Tb, Cb>* baseVari
       = new matrix_exp_action_vari<Ta, N, Tb, Cb>(A, B, t);
   Eigen::Matrix<var, N, Cb> expAB_v(A.rows(), B.cols());
