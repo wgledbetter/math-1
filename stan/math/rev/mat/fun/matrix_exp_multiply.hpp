@@ -355,16 +355,24 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
     std::cout << "--------------------------- chain" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
+    std::cout << "-- before setting up adjexpAB(" << n_ << ", " << B_cols_
+              << ")" << std::endl;
     MatrixXd adjexpAB(n_, B_cols_);
 
-    for (size_type i = 0; i < adjexpAB.size(); ++i)
+    std::cout << "-- traversing variRefexpAB_." << std::endl;
+    for (size_type i = 0; i < adjexpAB.size(); ++i) {
+      std::cout << "--   " << i << " / " << adjexpAB.size() << std::endl;
       adjexpAB(i) = variRefexpAB_[i]->adj_;
+    }
 
+    std::cout << "-- setting up adjA" << std::endl;
     MatrixXd adjA = exp_action_chain_vd(Ad_, Bd_, n_, B_cols_, adjexpAB, t_);
 
+    std::cout << "-- traversing variRefA_" << std::endl;
     for (size_type i = 0; i < A_size_; ++i) {
       variRefA_[i]->adj_ += adjA(i);
     }
+    std::cout << "--------------------------- end chain" << std::endl;
   }
 };
 
