@@ -138,7 +138,7 @@ class matrix_exp_action_vari : public vari {
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)),
         variRefexpAB_(
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)) {
-    std::cout << "***************************" << std::endl;
+    // std::cout << "***************************" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
     for (size_type i = 0; i < A.size(); ++i) {
@@ -332,8 +332,8 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
             ChainableStack::instance().memalloc_.alloc_array<vari*>(A_size_)),
         variRefexpAB_(
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)) {
-    std::cout << "*************************** this is the right one"
-              << std::endl;
+    // std::cout << "*************************** this is the right one" <<
+    // std::endl;
 
     using Eigen::Map;
     using Eigen::MatrixXd;
@@ -352,27 +352,26 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
   }
 
   virtual void chain() {
-    std::cout << "--------------------------- chain" << std::endl;
+    // std::cout << "--------------------------- chain" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
-    std::cout << "-- before setting up adjexpAB(" << n_ << ", " << B_cols_
-              << ")" << std::endl;
+    // std::cout << "-- before setting up adjexpAB(" << n_ << ", " << B_cols_ << ")" << std::endl;
     MatrixXd adjexpAB(n_, B_cols_);
 
-    std::cout << "-- traversing variRefexpAB_." << std::endl;
+    // std::cout << "-- traversing variRefexpAB_." << std::endl;
     for (size_type i = 0; i < adjexpAB.size(); ++i) {
-      std::cout << "--   " << i << " / " << adjexpAB.size() << std::endl;
+      // std::cout << "--   " << i << " / " << adjexpAB.size() << std::endl;
       adjexpAB(i) = variRefexpAB_[i]->adj_;
     }
 
-    std::cout << "-- setting up adjA" << std::endl;
+    // std::cout << "-- setting up adjA" << std::endl;
     MatrixXd adjA = exp_action_chain_vd(Ad_, Bd_, n_, B_cols_, adjexpAB, t_);
 
-    std::cout << "-- traversing variRefA_" << std::endl;
+    // std::cout << "-- traversing variRefA_" << std::endl;
     for (size_type i = 0; i < A_size_; ++i) {
       variRefA_[i]->adj_ += adjA(i);
     }
-    std::cout << "--------------------------- end chain" << std::endl;
+    // std::cout << "--------------------------- end chain" << std::endl;
   }
 };
 
@@ -394,7 +393,7 @@ inline typename boost::enable_if_c<boost::is_same<Ta, var>::value
                                    Eigen::Matrix<var, N, Cb> >::type
 matrix_exp_action(const Eigen::Matrix<Ta, N, N>& A,
                   const Eigen::Matrix<Tb, N, Cb>& B, const double& t = 1.0) {
-  std::cout << "+++++++++++++++++++++++++++++++" << std::endl;
+  // std::cout << "+++++++++++++++++++++++++++++++" << std::endl;
   matrix_exp_action_vari<Ta, N, Tb, Cb>* baseVari
       = new matrix_exp_action_vari<Ta, N, Tb, Cb>(A, B, t);
   Eigen::Matrix<var, N, Cb> expAB_v(A.rows(), B.cols());
