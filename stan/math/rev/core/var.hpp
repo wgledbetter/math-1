@@ -10,6 +10,7 @@
 #include <complex>
 #include <string>
 #include <exception>
+#include <iostream>
 
 namespace stan {
 namespace math {
@@ -258,7 +259,7 @@ class var {
    *
    * @param x Value of the variable.
    */
-  var(size_t x) : vi_(new vari(static_cast<double>(x))) {}  // NOLINT
+  var(size_t x) : vi_(new vari(static_cast<double>(x))) { std::cout << "** var(size_t)" << std::endl; }  // NOLINT
 
   /**
    * Construct a variable from the specified arithmetic argument
@@ -267,7 +268,7 @@ class var {
    *
    * @param x Value of the variable.
    */
-  var(ptrdiff_t x) : vi_(new vari(static_cast<double>(x))) {}  // NOLINT
+  var(ptrdiff_t x) : vi_(new vari(static_cast<double>(x))) { std::cout << "** var(ptrdiff_t)" << std::endl; }  // NOLINT
 #endif
 
 #ifdef BOOST_MATH_USE_FLOAT128
