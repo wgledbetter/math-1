@@ -69,32 +69,45 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 
   std::srand(1999);
 
-  std::cout << "stack size at start: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size at start: "
+            << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
 
-  Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
-  std::cout << "stack size after Av (" << N << ", " << N << "): " << stan::math::ChainableStack::instance().var_stack_.size()
+  Eigen::Matrix<var, -1, -1> Av(N, N);
+  Av << -0.96871, 0.398827, 0.241306, 0.741373, 0.108926, 0.888077, -0.915624,
+      -0.373344, 0.255238, 0.717304, -0.0899219, -0.898862, -0.800546,
+      -0.222652, -0.271382, 0.683227, 0.827031, -0.780702, -0.104228, 0.885106,
+      -0.996585, -0.097802, 0.739617, 0.235266, -0.0247717;
+
+  // Eigen::Matrix<var, -1, -1> Av = Eigen::Matrix<var, -1, -1>::Random(N, N);
+  std::cout << "stack size after Av (" << N << ", " << N
+            << "): " << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
   std::cout << "Av = " << Av << std::endl;
-  //Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
+  // Eigen::Matrix<var, -1, -1> Bv = Eigen::Matrix<var, -1, -1>::Random(N, M);
   std::vector<stan::math::var> Avec = stan::math::to_array_1d(Av);
-  std::cout << "stack size after Avec: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size after Avec: "
+            << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
-  //std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
+  // std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
   Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
-  std::cout << "stack size after B: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size after B: "
+            << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
   // brute force
-  //Eigen::Matrix<var, -1, -1> expAB
+  // Eigen::Matrix<var, -1, -1> expAB
   //= stan::math::multiply(stan::math::matrix_exp(Av), B);
 
-  std::cout << "stack size: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size: "
+            << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
 
   // matrix_exp_multiply
   Eigen::Matrix<var, -1, -1> res_vd = stan::math::matrix_exp_multiply(Av, B);
-  std::cout << "stack size after res_vd: " << stan::math::ChainableStack::instance().var_stack_.size()
+  std::cout << "stack size after res_vd: "
+            << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
+  stan::math::print_stack(std::cout);
   /*
     EXPECT_FLOAT_EQ(res_vd.size(), expAB.size());
     for (int l = 0; l < res_vd.size(); ++l) {
@@ -114,9 +127,9 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   //   }
   // }
   res_vd(0, 0).grad(Avec, g);
-  //expAB(0, 0).grad(Avec, g0);
-  //for (size_t j = 0; j < g.size(); ++j) {
-  //EXPECT_FLOAT_EQ(g[j], g0[j]);
+  // expAB(0, 0).grad(Avec, g0);
+  // for (size_t j = 0; j < g.size(); ++j) {
+  // EXPECT_FLOAT_EQ(g[j], g0[j]);
   //}
 
   /*
@@ -134,7 +147,7 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
 }
 
 TEST(MathMatrix, matrix_exp_multiply_vd) {
-  //test_matrix_exp_multiply_vd(1, 1);
+  // test_matrix_exp_multiply_vd(1, 1);
   // test_matrix_exp_multiply_vd(1, );
   // test_matrix_exp_multiply_vd(5, 1);
   test_matrix_exp_multiply_vd(5, 5);
