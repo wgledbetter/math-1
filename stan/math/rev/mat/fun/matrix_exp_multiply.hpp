@@ -332,8 +332,8 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
             ChainableStack::instance().memalloc_.alloc_array<vari*>(A_size_)),
         variRefexpAB_(
             ChainableStack::instance().memalloc_.alloc_array<vari*>(B_size_)) {
-    // std::cout << "*************************** this is the right one" <<
-    // std::endl;
+    std::cout << "*************************** this is the right one"
+              << std::endl;
 
     using Eigen::Map;
     using Eigen::MatrixXd;
@@ -355,7 +355,8 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
     // std::cout << "--------------------------- chain" << std::endl;
     using Eigen::Map;
     using Eigen::MatrixXd;
-    // std::cout << "-- before setting up adjexpAB(" << n_ << ", " << B_cols_ << ")" << std::endl;
+    // std::cout << "-- before setting up adjexpAB(" << n_ << ", " << B_cols_ <<
+    // ")" << std::endl;
     MatrixXd adjexpAB(n_, B_cols_);
 
     // std::cout << "-- traversing variRefexpAB_." << std::endl;
