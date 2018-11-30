@@ -90,7 +90,13 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
             << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
   // std::vector<stan::math::var> Bvec = stan::math::to_array_1d(Bv);
-  Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
+  // Eigen::MatrixXd B = Eigen::Matrix<double, -1, -1>::Random(N, M);
+  Eigen::MatrixXd B(N, M);
+  B << -0.96871, 0.398827, 0.241306, 0.741373, 0.108926, 0.888077, -0.915624,
+      -0.373344, 0.255238, 0.717304, -0.0899219, -0.898862, -0.800546,
+      -0.222652, -0.271382, 0.683227, 0.827031, -0.780702, -0.104228, 0.885106,
+      -0.996585, -0.097802, 0.739617, 0.235266, -0.0247717;
+  std::cout << "B = " << B << std::endl;
   std::cout << "stack size after B: "
             << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
