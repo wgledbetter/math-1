@@ -348,7 +348,7 @@ class matrix_exp_action_vari<Ta, N, double, Cb> : public vari {
     MatrixXd expAB = handle.action(Map<MatrixXd>(Ad_, n_, n_),
                                    Map<MatrixXd>(Bd_, n_, B_cols_), t_);
     for (size_type i = 0; i < expAB.size(); ++i)
-      variRefexpAB_[i] = new vari(expAB.coeffRef(i), false);
+      variRefexpAB_[i] = new vari(expAB.coeffRef(i));  //, false);
   }
 
   virtual void chain() {
