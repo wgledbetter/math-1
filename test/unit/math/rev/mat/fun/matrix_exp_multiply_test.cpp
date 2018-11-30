@@ -113,6 +113,8 @@ inline void test_matrix_exp_multiply_vd(int N, int M) {
   std::cout << "stack size after res_vd: "
             << stan::math::ChainableStack::instance().var_stack_.size()
             << std::endl;
+
+  std::cout << "res_vd = " << res_vd << std::endl;
   stan::math::print_stack(std::cout);
   /*
     EXPECT_FLOAT_EQ(res_vd.size(), expAB.size());
