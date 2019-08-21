@@ -3,9 +3,36 @@
 
 #include <stan/math/fwd/core.hpp>
 #include <stan/math/prim/mat/fun/Eigen.hpp>
+#include <thread>
 
 namespace stan {
 namespace math {
+
+static std::exception_ptr teptr = nullptr;
+
+template <typename T, typename F>
+void derivative(const F& f, const Eigen::Matrix<T, Eigen::Dynamic, 1>& x, size_t i, T& deriv) try {
+  Eigen::Matrix<fvar<T>, Eigen::Dynamic, 1> x_fvar(x.size());
+  for (int k = 0; k < x.size(); ++k)
+    x_fvar(k) = fvar<T>(x(k), k == i);
+  fvar<T> fx_fvar = f(x_fvar);
+  deriv = fx_fvar.d_;
+ } catch(...) {
+  teptr = std::current_exception();
+ }
+
+template <typename T, typename F>
+void derivative_with_value(const F& f, const Eigen::Matrix<T, Eigen::Dynamic, 1>& x,
+			   size_t i, T& lp, T& deriv) try {
+  Eigen::Matrix<fvar<T>, Eigen::Dynamic, 1> x_fvar(x.size());
+  for (int k = 0; k < x.size(); ++k)
+    x_fvar(k) = fvar<T>(x(k), k == i);
+  fvar<T> fx_fvar = f(x_fvar);
+  lp = fx_fvar.val_;
+  deriv = fx_fvar.d_;
+ } catch(...) {
+  teptr = std::current_exception();
+ }
 
 /**
  * Calculate the value and the gradient of the specified function
@@ -38,18 +65,36 @@ namespace math {
 template <typename T, typename F>
 void gradient(const F& f, const Eigen::Matrix<T, Eigen::Dynamic, 1>& x, T& fx,
               Eigen::Matrix<T, Eigen::Dynamic, 1>& grad_fx) {
-  std::cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-	    << std::endl;
-  Eigen::Matrix<fvar<T>, Eigen::Dynamic, 1> x_fvar(x.size());
   grad_fx.resize(x.size());
-  for (int i = 0; i < x.size(); ++i) {
-    for (int k = 0; k < x.size(); ++k)
-      x_fvar(k) = fvar<T>(x(k), k == i);
-    fvar<T> fx_fvar = f(x_fvar);
+  
+  for (size_t i = 0; i < x.size(); ++i) {
     if (i == 0)
-      fx = fx_fvar.val_;
-    grad_fx(i) = fx_fvar.d_;
+      derivative_with_value<T, F>(f, x, i, fx, grad_fx[i]);
+    else
+      derivative<T, F>(f, x, i, grad_fx[i]);
   }
+  
+  /*
+  std::vector<std::thread> threads(x.size());
+
+  for (size_t i = 0; i < x.size(); ++i) {
+    if (i == 0)
+      threads[i] = std::thread(derivative_with_value<T, F>,
+			       f, std::ref(x), i, std::ref(fx), std::ref(grad_fx[i]));
+    else
+      threads[i] = std::thread(derivative<T, F>,
+			       f, std::ref(x), i, std::ref(grad_fx[i]));
+  }
+  
+  for (size_t i = 0; i < x.size(); ++i) {
+    threads[i].join();
+  }
+
+  if (teptr) {
+    std::rethrow_exception(teptr);
+    teptr = nullptr;
+  }
+  */
 }
 
 }  // namespace math
