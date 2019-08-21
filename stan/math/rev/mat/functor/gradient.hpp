@@ -41,6 +41,8 @@ namespace math {
 template <typename F>
 void gradient(const F& f, const Eigen::Matrix<double, Eigen::Dynamic, 1>& x,
               double& fx, Eigen::Matrix<double, Eigen::Dynamic, 1>& grad_fx) {
+  std::cout << "************************************************************"
+	    << std::endl;
   start_nested();
   try {
     Eigen::Matrix<var, Eigen::Dynamic, 1> x_var(x.size());
