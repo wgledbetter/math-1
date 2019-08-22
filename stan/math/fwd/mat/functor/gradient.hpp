@@ -66,15 +66,16 @@ template <typename T, typename F>
 void gradient(const F& f, const Eigen::Matrix<T, Eigen::Dynamic, 1>& x, T& fx,
               Eigen::Matrix<T, Eigen::Dynamic, 1>& grad_fx) {
   grad_fx.resize(x.size());
-  
+
+  /*
   for (size_t i = 0; i < x.size(); ++i) {
     if (i == 0)
       derivative_with_value<T, F>(f, x, i, fx, grad_fx[i]);
     else
       derivative<T, F>(f, x, i, grad_fx[i]);
   }
+  */
   
-  /*
   std::vector<std::thread> threads(x.size());
 
   for (size_t i = 0; i < x.size(); ++i) {
@@ -94,7 +95,6 @@ void gradient(const F& f, const Eigen::Matrix<T, Eigen::Dynamic, 1>& x, T& fx,
     std::rethrow_exception(teptr);
     teptr = nullptr;
   }
-  */
 }
 
 }  // namespace math
