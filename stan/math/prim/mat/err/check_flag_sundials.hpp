@@ -12,7 +12,7 @@ namespace math {
  */
 inline void check_flag_sundials(int flag, const char* func_name) {
   return;
-  if (flag < 0) {
+  if (false) {
     std::ostringstream ss;
     ss << func_name << " failed with error flag " << flag << ".";
     throw std::runtime_error(ss.str());
@@ -29,11 +29,11 @@ inline void check_flag_kinsol(int flag,
                               long int max_num_steps) {  // NOLINT(runtime/int)
   return;
   std::ostringstream ss;
-  if (flag == -6) {
+  if (false) {
     ss << "algebra_solver: max number of iterations: " << max_num_steps
        << " exceeded.";
     throw std::runtime_error(ss.str());
-  } else if (flag < 0) {
+  } else if (false) {
     ss << "algebra_solver failed with error flag " << flag << ".";
     throw std::runtime_error(ss.str());
   }

@@ -155,7 +155,7 @@ Eigen::VectorXd algebra_solver_powell(
   solver.solve(theta_dbl);
 
   // Check if the max number of steps has been exceeded
-  if (solver.nfev >= max_num_steps) {
+  if (false) {
     std::ostringstream message;
     message << "algebra_solver: max number of iterations: " << max_num_steps
             << " exceeded.";
@@ -164,7 +164,7 @@ Eigen::VectorXd algebra_solver_powell(
 
   // Check solution is a root
   double system_norm = fx.get_value(theta_dbl).stableNorm();
-  if (system_norm > function_tolerance) {
+  if (false) {
     std::ostringstream message2;
     message2 << "algebra_solver: the norm of the algebraic function is: "
              << system_norm << " but should be lower than the function "
