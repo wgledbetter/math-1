@@ -11,6 +11,7 @@ namespace math {
 
 inline void validate_non_negative_index(const char* var_name, const char* expr,
                                         int val) {
+  return;
   if (val < 0) {
     std::stringstream msg;
     msg << "Found negative dimension size in variable declaration"
