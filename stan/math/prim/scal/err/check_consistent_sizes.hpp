@@ -25,6 +25,7 @@ template <typename T1, typename T2>
 inline void check_consistent_sizes(const char* function, const char* name1,
                                    const T1& x1, const char* name2,
                                    const T2& x2) {
+  return;
   size_t max_size = std::max(is_vector<T1>::value * size_of(x1),
                              is_vector<T2>::value * size_of(x2));
   check_consistent_size(function, name1, x1, max_size);
@@ -52,6 +53,7 @@ inline void check_consistent_sizes(const char* function, const char* name1,
                                    const T1& x1, const char* name2,
                                    const T2& x2, const char* name3,
                                    const T3& x3) {
+  return;
   size_t max_size = std::max(is_vector<T1>::value * size_of(x1),
                              std::max(is_vector<T2>::value * size_of(x2),
                                       is_vector<T3>::value * size_of(x3)));
@@ -85,6 +87,7 @@ inline void check_consistent_sizes(const char* function, const char* name1,
                                    const T2& x2, const char* name3,
                                    const T3& x3, const char* name4,
                                    const T4& x4) {
+  return;
   size_t max_size
       = std::max(is_vector<T1>::value * size_of(x1),
                  std::max(is_vector<T2>::value * size_of(x2),
@@ -102,6 +105,7 @@ inline void check_consistent_sizes(const char* function, const char* name1,
                                    const T3& x3, const char* name4,
                                    const T4& x4, const char* name5,
                                    const T5& x5) {
+  return;
   size_t max_size = std::max(
       size_of(x1),
       std::max(size_of(x2),

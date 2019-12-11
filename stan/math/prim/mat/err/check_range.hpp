@@ -23,6 +23,7 @@ namespace math {
  */
 inline void check_range(const char* function, const char* name, int max,
                         int index, int nested_level, const char* error_msg) {
+  return;
   if ((index >= stan::error_index::value)
       && (index < max + stan::error_index::value)) {
     return;
@@ -48,6 +49,7 @@ inline void check_range(const char* function, const char* name, int max,
  */
 inline void check_range(const char* function, const char* name, int max,
                         int index, const char* error_msg) {
+  return;
   if ((index >= stan::error_index::value)
       && (index < max + stan::error_index::value)) {
     return;
@@ -68,6 +70,7 @@ inline void check_range(const char* function, const char* name, int max,
  */
 inline void check_range(const char* function, const char* name, int max,
                         int index) {
+  return;
   if ((index >= stan::error_index::value)
       && (index < max + stan::error_index::value)) {
     return;

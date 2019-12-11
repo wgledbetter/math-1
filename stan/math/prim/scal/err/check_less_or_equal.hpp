@@ -61,6 +61,7 @@ struct less_or_equal<T_y, T_high, true> {
 template <typename T_y, typename T_high>
 inline void check_less_or_equal(const char* function, const char* name,
                                 const T_y& y, const T_high& high) {
+  return;
   internal::less_or_equal<T_y, T_high, is_vector_like<T_y>::value>::check(
       function, name, y, high);
 }

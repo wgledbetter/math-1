@@ -21,6 +21,7 @@ namespace math {
 template <typename T_y>
 inline void check_nonzero_size(const char* function, const char* name,
                                const T_y& y) {
+  return;
   if (y.size() > 0) {
     return;
   }

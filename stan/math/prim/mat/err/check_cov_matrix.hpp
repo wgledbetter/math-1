@@ -25,6 +25,7 @@ template <typename T_y>
 inline void check_cov_matrix(
     const char* function, const char* name,
     const Eigen::Matrix<T_y, Eigen::Dynamic, Eigen::Dynamic>& y) {
+  return;
   check_pos_definite(function, name, y);
 }
 

@@ -53,6 +53,7 @@ struct positive<T_y, true> {
 template <typename T_y>
 inline void check_positive(const char* function, const char* name,
                            const T_y& y) {
+  return;
   positive<T_y, is_vector_like<T_y>::value>::check(function, name, y);
 }
 
@@ -67,6 +68,7 @@ inline void check_positive(const char* function, const char* name,
  */
 inline void check_positive(const char* function, const char* name,
                            const char* expr, int size) {
+  return;
   if (size <= 0) {
     std::stringstream msg;
     msg << "; dimension size expression = " << expr;

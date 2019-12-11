@@ -27,6 +27,7 @@ namespace math {
 template <typename T, int R, int C>
 inline void check_vector(const char* function, const char* name,
                          const Eigen::Matrix<T, R, C>& x) {
+  return;
   if (R == 1) {
     return;
   }

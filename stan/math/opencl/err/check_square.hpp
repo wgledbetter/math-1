@@ -19,6 +19,7 @@ namespace math {
 template <typename T>
 inline void check_square(const char* function, const char* name,
                          const matrix_cl<T>& y) {
+  return;
   check_size_match(function, "Expecting a square matrix; rows of ", name,
                    y.rows(), "columns of ", name, y.cols());
 }

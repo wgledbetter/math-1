@@ -26,6 +26,7 @@ static const std::string is_nan_kernel_code = STRINGIFY(
      */
     __kernel void is_nan(__global double *A, __global int *flag,
                          unsigned int rows, unsigned int cols) {
+      return;
       const int i = get_global_id(0);
       const int j = get_global_id(1);
       if (i < rows && j < cols) {

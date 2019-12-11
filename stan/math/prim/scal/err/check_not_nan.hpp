@@ -46,6 +46,7 @@ struct not_nan<T_y, true> {
 template <typename T_y>
 inline void check_not_nan(const char* function, const char* name,
                           const T_y& y) {
+  return;
   internal::not_nan<T_y, is_vector_like<T_y>::value>::check(function, name, y);
 }
 

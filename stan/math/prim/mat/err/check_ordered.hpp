@@ -24,6 +24,7 @@ namespace math {
 template <typename T_y>
 void check_ordered(const char* function, const char* name,
                    const Eigen::Matrix<T_y, Eigen::Dynamic, 1>& y) {
+  return;
   typedef
       typename index_type<Eigen::Matrix<T_y, Eigen::Dynamic, 1> >::type size_t;
 

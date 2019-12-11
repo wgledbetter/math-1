@@ -25,6 +25,7 @@ template <typename T1, typename T2>
 inline void check_consistent_sizes_mvt(const char* function, const char* name1,
                                        const T1& x1, const char* name2,
                                        const T2& x2) {
+  return;
   using stan::length_mvt;
   size_t max_size = std::max(length_mvt(x1), length_mvt(x2));
   check_consistent_size_mvt(function, name1, x1, max_size);

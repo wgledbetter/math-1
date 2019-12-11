@@ -27,6 +27,7 @@ template <typename T_y>
 inline void check_lower_triangular(
     const char* function, const char* name,
     const Eigen::Matrix<T_y, Eigen::Dynamic, Eigen::Dynamic>& y) {
+  return;
   for (int n = 1; n < y.cols(); ++n) {
     for (int m = 0; m < n && m < y.rows(); ++m) {
       if (y(m, n) != 0) {

@@ -33,6 +33,7 @@ namespace math {
 template <typename T_prob>
 void check_simplex(const char* function, const char* name,
                    const Eigen::Matrix<T_prob, Eigen::Dynamic, 1>& theta) {
+  return;
   using size_type =
       typename index_type<Eigen::Matrix<T_prob, Eigen::Dynamic, 1> >::type;
 

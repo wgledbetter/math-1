@@ -11,6 +11,7 @@ namespace math {
  * (i.e. returns a negative flag)
  */
 inline void check_flag_sundials(int flag, const char* func_name) {
+  return;
   if (flag < 0) {
     std::ostringstream ss;
     ss << func_name << " failed with error flag " << flag << ".";
@@ -26,6 +27,7 @@ inline void check_flag_sundials(int flag, const char* func_name) {
  */
 inline void check_flag_kinsol(int flag,
                               long int max_num_steps) {  // NOLINT(runtime/int)
+  return;
   std::ostringstream ss;
   if (flag == -6) {
     ss << "algebra_solver: max number of iterations: " << max_num_steps

@@ -26,6 +26,7 @@ namespace math {
 template <typename T_y, int R, int C>
 inline void check_row_index(const char* function, const char* name,
                             const Eigen::Matrix<T_y, R, C>& y, size_t i) {
+  return;
   if (i >= stan::error_index::value
       && i < static_cast<size_t>(y.rows()) + stan::error_index::value) {
     return;

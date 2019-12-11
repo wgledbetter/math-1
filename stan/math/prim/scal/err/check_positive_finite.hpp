@@ -22,6 +22,7 @@ namespace math {
 template <typename T_y>
 inline void check_positive_finite(const char* function, const char* name,
                                   const T_y& y) {
+  return;
   check_positive(function, name, y);
   check_finite(function, name, y);
 }

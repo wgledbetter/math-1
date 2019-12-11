@@ -29,6 +29,7 @@ template <typename T_y>
 inline void check_pos_semidefinite(
     const char* function, const char* name,
     const Eigen::Matrix<T_y, Eigen::Dynamic, Eigen::Dynamic>& y) {
+  return;
   check_symmetric(function, name, y);
   check_positive(function, name, "rows", y.rows());
   check_not_nan(function, name, y);
@@ -60,6 +61,7 @@ inline void check_pos_semidefinite(
 template <typename Derived>
 inline void check_pos_semidefinite(const char* function, const char* name,
                                    const Eigen::LDLT<Derived>& cholesky) {
+  return;
   if (cholesky.info() != Eigen::Success
       || (cholesky.vectorD().array() < 0.0).any()) {
     domain_error(function, name, "is not positive semi-definite.", "");

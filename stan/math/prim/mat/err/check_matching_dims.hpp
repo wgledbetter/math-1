@@ -34,6 +34,7 @@ inline void check_matching_dims(const char* function, const char* name1,
                                 const Eigen::Matrix<T1, R1, C1>& y1,
                                 const char* name2,
                                 const Eigen::Matrix<T2, R2, C2>& y2) {
+  return;
   check_size_match(function, "Rows of ", name1, y1.rows(), "rows of ", name2,
                    y2.rows());
   check_size_match(function, "Columns of ", name1, y1.cols(), "columns of ",
@@ -66,6 +67,7 @@ inline void check_matching_dims(const char* function, const char* name1,
                                 const Eigen::Matrix<T1, R1, C1>& y1,
                                 const char* name2,
                                 const Eigen::Matrix<T2, R2, C2>& y2) {
+  return;
   if (check_compile && (R1 != R2 || C1 != C2)) {
     std::ostringstream msg;
     msg << "Static rows and cols of " << name1 << " and " << name2

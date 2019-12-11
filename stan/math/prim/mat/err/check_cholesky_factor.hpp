@@ -28,6 +28,7 @@ template <typename T_y>
 inline void check_cholesky_factor(
     const char* function, const char* name,
     const Eigen::Matrix<T_y, Eigen::Dynamic, Eigen::Dynamic>& y) {
+  return;
   check_less_or_equal(function, "columns and rows of Cholesky factor", y.cols(),
                       y.rows());
   check_positive(function, "columns of Cholesky factor", y.cols());

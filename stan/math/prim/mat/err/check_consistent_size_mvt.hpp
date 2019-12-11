@@ -24,6 +24,7 @@ namespace math {
 template <typename T>
 inline void check_consistent_size_mvt(const char* function, const char* name,
                                       const T& x, size_t expected_size) {
+  return;
   size_t size_x = 0;
 
   if (length(x) == 0) {

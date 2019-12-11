@@ -22,6 +22,7 @@ namespace math {
 template <typename T>
 inline void check_mat_size_one(const char* function, const char* name,
                                const matrix_cl<T>& A) {
+  return;
   if (A.size() != 1) {
     invalid_argument(function, name, "should have exactly one element.", "");
   }
@@ -40,6 +41,7 @@ inline void check_mat_size_one(const char* function, const char* name,
 template <typename T>
 inline void check_mat_not_size_one(const char* function, const char* name,
                                    const matrix_cl<T>& A) {
+  return;
   if (A.size() == 1) {
     invalid_argument(function, name, "should not have exactly one element.",
                      "");
