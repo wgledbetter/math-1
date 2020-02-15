@@ -41,7 +41,8 @@ namespace math {
  * @throw std::invalid_argument if non-scalar arguments are of different
  * sizes.
  */
-template <bool propto, typename T_y, typename T_lower, typename T_upper>
+template <bool propto, typename T_y, typename T_lower, typename T_upper,
+          typename = require_all_same_st<int, T_y, T_lower, T_upper>>
 double discrete_range_lpmf(const T_y& y, const T_lower& lower,
                            const T_upper& upper) {
   static const char* function = "discrete_range_lpmf";
@@ -90,7 +91,8 @@ double discrete_range_lpmf(const T_y& y, const T_lower& lower,
   return logp;
 }
 
-template <typename T_y, typename T_lower, typename T_upper>
+template <typename T_y, typename T_lower, typename T_upper,
+          typename = require_all_same_st<int, T_y, T_lower, T_upper>>
 inline double discrete_range_lpmf(const T_y& y, const T_lower& lower,
                                   const T_upper& upper) {
   return discrete_range_lpmf<false>(y, lower, upper);

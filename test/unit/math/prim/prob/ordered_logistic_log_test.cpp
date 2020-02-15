@@ -53,6 +53,6 @@ TEST(ProbOrderedLogistic, log_matches_lpmf) {
   EXPECT_FLOAT_EQ((stan::math::ordered_logistic_lpmf<true>(3, lambda, c)),
                   (stan::math::ordered_logistic_log<true>(3, lambda, c)));
   EXPECT_FLOAT_EQ(
-      (stan::math::ordered_logistic_lpmf<double, double>(3, lambda, c)),
-      (stan::math::ordered_logistic_log<double, double>(3, lambda, c)));
+      (stan::math::ordered_logistic_lpmf<int, double>(3, lambda, c)),
+      (stan::math::ordered_logistic_log<int, double>(3, lambda, c)));
 }

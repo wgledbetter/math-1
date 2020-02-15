@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>poisson_lcdf</code>
  */
-template <typename T_n, typename T_rate>
+template <typename T_n, typename T_rate,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_rate> poisson_cdf_log(const T_n& n, const T_rate& lambda) {
   return poisson_lcdf<T_n, T_rate>(n, lambda);
 }

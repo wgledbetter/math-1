@@ -18,7 +18,8 @@ namespace stan {
 namespace math {
 
 // NegBinomial(n|mu, phi)  [mu >= 0; phi > 0;  n >= 0]
-template <bool propto, typename T_n, typename T_location, typename T_precision>
+template <bool propto, typename T_n, typename T_location, typename T_precision,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_location, T_precision> neg_binomial_2_lpmf(
     const T_n& n, const T_location& mu, const T_precision& phi) {
   using T_partials_return = partials_return_t<T_n, T_location, T_precision>;
@@ -118,7 +119,8 @@ return_type_t<T_location, T_precision> neg_binomial_2_lpmf(
   return ops_partials.build(logp);
 }
 
-template <typename T_n, typename T_location, typename T_precision>
+template <typename T_n, typename T_location, typename T_precision,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_location, T_precision> neg_binomial_2_lpmf(
     const T_n& n, const T_location& mu, const T_precision& phi) {
   return neg_binomial_2_lpmf<false>(n, mu, phi);

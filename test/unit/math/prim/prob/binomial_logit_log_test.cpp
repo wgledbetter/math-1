@@ -12,10 +12,10 @@ TEST(ProbBinomialLogit, log_matches_lpmf) {
                   (stan::math::binomial_logit_log<true>(n, N, theta)));
   EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<false>(n, N, theta)),
                   (stan::math::binomial_logit_log<false>(n, N, theta)));
-  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<true, double>(n, N, theta)),
-                  (stan::math::binomial_logit_log<true, double>(n, N, theta)));
-  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<false, double>(n, N, theta)),
-                  (stan::math::binomial_logit_log<false, double>(n, N, theta)));
-  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<double>(n, N, theta)),
-                  (stan::math::binomial_logit_log<double>(n, N, theta)));
+  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<true, int>(n, N, theta)),
+                  (stan::math::binomial_logit_log<true, int>(n, N, theta)));
+  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<false, int>(n, N, theta)),
+                  (stan::math::binomial_logit_log<false, int>(n, N, theta)));
+  EXPECT_FLOAT_EQ((stan::math::binomial_logit_lpmf<int>(n, N, theta)),
+                  (stan::math::binomial_logit_log<int>(n, N, theta)));
 }

@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>neg_binomial_lpmf</code>
  */
-template <bool propto, typename T_n, typename T_shape, typename T_inv_scale>
+template <bool propto, typename T_n, typename T_shape, typename T_inv_scale,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_shape, T_inv_scale> neg_binomial_log(const T_n& n,
                                                      const T_shape& alpha,
                                                      const T_inv_scale& beta) {
@@ -20,7 +21,8 @@ return_type_t<T_shape, T_inv_scale> neg_binomial_log(const T_n& n,
 /** \ingroup prob_dists
  * @deprecated use <code>neg_binomial_lpmf</code>
  */
-template <typename T_n, typename T_shape, typename T_inv_scale>
+template <typename T_n, typename T_shape, typename T_inv_scale,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_shape, T_inv_scale> neg_binomial_log(
     const T_n& n, const T_shape& alpha, const T_inv_scale& beta) {
   return neg_binomial_lpmf<T_n, T_shape, T_inv_scale>(n, alpha, beta);

@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>bernoulli_lcdf</code>
  */
-template <typename T_n, typename T_prob>
+template <typename T_n, typename T_prob,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_prob> bernoulli_cdf_log(const T_n& n, const T_prob& theta) {
   return bernoulli_lcdf<T_n, T_prob>(n, theta);
 }

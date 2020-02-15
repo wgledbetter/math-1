@@ -40,7 +40,8 @@ namespace math {
  * @throw std::invalid_argument if container sizes mismatch.
  */
 template <bool propto, typename T_y, typename T_x_scalar, int T_x_rows,
-          typename T_beta_scalar, typename T_cuts_scalar>
+          typename T_beta_scalar, typename T_cuts_scalar,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_x_scalar, T_beta_scalar, T_cuts_scalar>
 ordered_logistic_glm_lpmf(
     const T_y& y, const Eigen::Matrix<T_x_scalar, T_x_rows, Eigen::Dynamic>& x,
@@ -196,7 +197,8 @@ ordered_logistic_glm_lpmf(
 }
 
 template <typename T_y, typename T_x_scalar, int T_x_rows,
-          typename T_beta_scalar, typename T_cuts_scalar>
+          typename T_beta_scalar, typename T_cuts_scalar,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_x_scalar, T_beta_scalar, T_cuts_scalar>
 ordered_logistic_glm_lpmf(
     const T_y& y, const Eigen::Matrix<T_x_scalar, T_x_rows, Eigen::Dynamic>& x,

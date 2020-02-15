@@ -17,7 +17,8 @@ namespace stan {
 namespace math {
 
 // Poisson CDF
-template <typename T_n, typename T_rate>
+template <typename T_n, typename T_rate,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_rate> poisson_cdf(const T_n& n, const T_rate& lambda) {
   static const char* function = "poisson_cdf";
   using T_partials_return = partials_return_t<T_n, T_rate>;

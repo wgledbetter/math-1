@@ -37,7 +37,8 @@ namespace math {
  *
  * @deprecated use <code>ordered_probit_lpmf</code>
  */
-template <bool propto, typename T_y, typename T_loc, typename T_cut>
+template <bool propto, typename T_y, typename T_loc, typename T_cut,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_loc, T_cut> ordered_probit_log(const T_y& y,
                                                const T_loc& lambda,
                                                const T_cut& c) {
@@ -47,7 +48,8 @@ return_type_t<T_loc, T_cut> ordered_probit_log(const T_y& y,
 /** \ingroup multivar_dists
  * @deprecated use <code>ordered_probit_lpmf</code>
  */
-template <typename T_y, typename T_loc, typename T_cut>
+template <typename T_y, typename T_loc, typename T_cut,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_loc, T_cut> ordered_probit_log(const T_y& y,
                                                const T_loc& lambda,
                                                const T_cut& c) {

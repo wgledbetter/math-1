@@ -18,7 +18,8 @@
 namespace stan {
 namespace math {
 
-template <typename T_n, typename T_location, typename T_precision>
+template <typename T_n, typename T_location, typename T_precision,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_location, T_precision> neg_binomial_2_cdf(
     const T_n& n, const T_location& mu, const T_precision& phi) {
   static const char* function = "neg_binomial_2_cdf";

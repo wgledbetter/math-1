@@ -28,7 +28,8 @@ namespace math {
  * @throw std::invalid_argument if non-scalar arguments are of different
  * sizes
  */
-template <typename T_N, typename T_shape1, typename T_shape2, class RNG>
+template <typename T_N, typename T_shape1, typename T_shape2, class RNG,
+          typename = require_all_same_st<int, T_N>>
 inline typename VectorBuilder<true, int, T_N, T_shape1, T_shape2>::type
 beta_binomial_rng(const T_N &N, const T_shape1 &alpha, const T_shape2 &beta,
                   RNG &rng) {

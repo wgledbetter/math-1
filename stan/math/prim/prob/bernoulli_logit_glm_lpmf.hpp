@@ -43,9 +43,9 @@ namespace math {
  * @throw std::domain_error if y is not binary.
  * @throw std::invalid_argument if container sizes mismatch.
  */
-
 template <bool propto, typename T_y, typename T_x_scalar, int T_x_rows,
-          typename T_alpha, typename T_beta>
+          typename T_alpha, typename T_beta,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_x_scalar, T_alpha, T_beta> bernoulli_logit_glm_lpmf(
     const T_y &y, const Eigen::Matrix<T_x_scalar, T_x_rows, Eigen::Dynamic> &x,
     const T_alpha &alpha, const T_beta &beta) {
@@ -165,7 +165,8 @@ return_type_t<T_x_scalar, T_alpha, T_beta> bernoulli_logit_glm_lpmf(
   return ops_partials.build(logp);
 }
 
-template <typename T_y, typename T_x, typename T_alpha, typename T_beta>
+template <typename T_y, typename T_x, typename T_alpha, typename T_beta,
+          typename = require_all_same_st<int, T_y>>
 inline return_type_t<T_x, T_beta, T_alpha> bernoulli_logit_glm_lpmf(
     const T_y &y, const T_x &x, const T_alpha &alpha, const T_beta &beta) {
   return bernoulli_logit_glm_lpmf<false>(y, x, alpha, beta);

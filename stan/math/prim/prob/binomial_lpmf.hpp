@@ -31,7 +31,8 @@ namespace math {
  * @throw std::domain_error if theta is not a valid probability
  * @throw std::invalid_argument if container sizes mismatch
  */
-template <bool propto, typename T_n, typename T_N, typename T_prob>
+template <bool propto, typename T_n, typename T_N, typename T_prob,
+          typename = require_all_same_st<int, T_n, T_N>>
 return_type_t<T_prob> binomial_lpmf(const T_n& n, const T_N& N,
                                     const T_prob& theta) {
   using T_partials_return = partials_return_t<T_n, T_N, T_prob>;
@@ -103,7 +104,8 @@ return_type_t<T_prob> binomial_lpmf(const T_n& n, const T_N& N,
   return ops_partials.build(logp);
 }
 
-template <typename T_n, typename T_N, typename T_prob>
+template <typename T_n, typename T_N, typename T_prob,
+          typename = require_all_same_st<int, T_n, T_N>>
 inline return_type_t<T_prob> binomial_lpmf(const T_n& n, const T_N& N,
                                            const T_prob& theta) {
   return binomial_lpmf<false>(n, N, theta);

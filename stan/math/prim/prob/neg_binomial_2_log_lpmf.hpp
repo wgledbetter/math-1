@@ -21,7 +21,7 @@ namespace math {
 
 // NegBinomial(n|eta, phi)  [phi > 0;  n >= 0]
 template <bool propto, typename T_n, typename T_log_location,
-          typename T_precision>
+          typename T_precision, typename = require_all_same_st<int, T_n>>
 return_type_t<T_log_location, T_precision> neg_binomial_2_log_lpmf(
     const T_n& n, const T_log_location& eta, const T_precision& phi) {
   using T_partials_return = partials_return_t<T_n, T_log_location, T_precision>;
@@ -128,7 +128,8 @@ return_type_t<T_log_location, T_precision> neg_binomial_2_log_lpmf(
   return ops_partials.build(logp);
 }
 
-template <typename T_n, typename T_log_location, typename T_precision>
+template <typename T_n, typename T_log_location, typename T_precision,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_log_location, T_precision> neg_binomial_2_log_lpmf(
     const T_n& n, const T_log_location& eta, const T_precision& phi) {
   return neg_binomial_2_log_lpmf<false>(n, eta, phi);

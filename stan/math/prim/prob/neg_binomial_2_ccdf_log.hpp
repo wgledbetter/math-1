@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>neg_binomial_2_lccdf</code>
  */
-template <typename T_n, typename T_location, typename T_precision>
+template <typename T_n, typename T_location, typename T_precision,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_location, T_precision> neg_binomial_2_ccdf_log(
     const T_n& n, const T_location& mu, const T_precision& phi) {
   return neg_binomial_2_lccdf<T_n, T_location, T_precision>(n, mu, phi);

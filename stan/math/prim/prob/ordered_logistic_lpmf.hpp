@@ -64,7 +64,8 @@ namespace math {
  * @throw std::invalid_argument If y and lambda are different
  * lengths.
  */
-template <bool propto, typename T_y, typename T_loc, typename T_cut>
+template <bool propto, typename T_y, typename T_loc, typename T_cut,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_loc, T_cut> ordered_logistic_lpmf(const T_y& y,
                                                   const T_loc& lambda,
                                                   const T_cut& c) {
@@ -164,7 +165,8 @@ return_type_t<T_loc, T_cut> ordered_logistic_lpmf(const T_y& y,
   return ops_partials.build(logp);
 }
 
-template <typename T_y, typename T_loc, typename T_cut>
+template <typename T_y, typename T_loc, typename T_cut,
+          typename = require_all_same_st<int, T_y>>
 return_type_t<T_loc, T_cut> ordered_logistic_lpmf(const T_y& y,
                                                   const T_loc& lambda,
                                                   const T_cut& c) {

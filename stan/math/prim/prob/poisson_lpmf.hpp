@@ -16,7 +16,8 @@ namespace stan {
 namespace math {
 
 // Poisson(n|lambda)  [lambda > 0;  n >= 0]
-template <bool propto, typename T_n, typename T_rate>
+template <bool propto, typename T_n, typename T_rate,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_rate> poisson_lpmf(const T_n& n, const T_rate& lambda) {
   using T_partials_return = partials_return_t<T_n, T_rate>;
 
@@ -81,7 +82,8 @@ return_type_t<T_rate> poisson_lpmf(const T_n& n, const T_rate& lambda) {
   return ops_partials.build(logp);
 }
 
-template <typename T_n, typename T_rate>
+template <typename T_n, typename T_rate,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_rate> poisson_lpmf(const T_n& n, const T_rate& lambda) {
   return poisson_lpmf<false>(n, lambda);
 }

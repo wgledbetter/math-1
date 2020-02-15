@@ -21,7 +21,8 @@
 namespace stan {
 namespace math {
 
-template <typename T_n, typename T_shape, typename T_inv_scale>
+template <typename T_n, typename T_shape, typename T_inv_scale,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_shape, T_inv_scale> neg_binomial_lcdf(const T_n& n,
                                                       const T_shape& alpha,
                                                       const T_inv_scale& beta) {

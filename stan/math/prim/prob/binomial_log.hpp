@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>binomial_lpmf</code>
  */
-template <bool propto, typename T_n, typename T_N, typename T_prob>
+template <bool propto, typename T_n, typename T_N, typename T_prob,
+          typename = require_all_same_st<int, T_n, T_N>>
 return_type_t<T_prob> binomial_log(const T_n& n, const T_N& N,
                                    const T_prob& theta) {
   return binomial_lpmf<propto, T_n, T_N, T_prob>(n, N, theta);
@@ -19,7 +20,8 @@ return_type_t<T_prob> binomial_log(const T_n& n, const T_N& N,
 /** \ingroup prob_dists
  * @deprecated use <code>binomial_lpmf</code>
  */
-template <typename T_n, typename T_N, typename T_prob>
+template <typename T_n, typename T_N, typename T_prob,
+          typename = require_all_same_st<int, T_n, T_N>>
 inline return_type_t<T_prob> binomial_log(const T_n& n, const T_N& N,
                                           const T_prob& theta) {
   return binomial_lpmf<T_n, T_N, T_prob>(n, N, theta);

@@ -11,7 +11,7 @@ namespace math {
  * @deprecated use <code>bernoulli_logit_glm_lpmf</code>
  */
 template <bool propto, typename T_y, typename T_x, typename T_alpha,
-          typename T_beta>
+          typename T_beta, typename = require_all_same_st<int, T_y>>
 return_type_t<T_x, T_alpha, T_beta> bernoulli_logit_glm_log(
     const T_y &y, const T_x &x, const T_alpha &alpha, const T_beta &beta) {
   return bernoulli_logit_glm_lpmf<propto, T_y, T_x, T_alpha, T_beta>(
@@ -21,7 +21,8 @@ return_type_t<T_x, T_alpha, T_beta> bernoulli_logit_glm_log(
 /** \ingroup multivar_dists
  * @deprecated use <code>bernoulli_logit_glm_lpmf</code>
  */
-template <typename T_y, typename T_x, typename T_alpha, typename T_beta>
+template <typename T_y, typename T_x, typename T_alpha, typename T_beta,
+          typename = require_all_same_st<int, T_y>>
 inline return_type_t<T_x, T_alpha, T_beta> bernoulli_logit_glm_log(
     const T_y &y, const T_x &x, const T_alpha &alpha, const T_beta &beta) {
   return bernoulli_logit_glm_lpmf<false>(y, x, alpha, beta);

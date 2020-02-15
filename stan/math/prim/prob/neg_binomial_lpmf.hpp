@@ -25,7 +25,8 @@ constexpr double neg_binomial_alpha_cutoff = 1e10;
 }  // namespace internal
 
 // NegBinomial(n|alpha, beta)  [alpha > 0;  beta > 0;  n >= 0]
-template <bool propto, typename T_n, typename T_shape, typename T_inv_scale>
+template <bool propto, typename T_n, typename T_shape, typename T_inv_scale,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_shape, T_inv_scale> neg_binomial_lpmf(const T_n& n,
                                                       const T_shape& alpha,
                                                       const T_inv_scale& beta) {
@@ -137,7 +138,8 @@ return_type_t<T_shape, T_inv_scale> neg_binomial_lpmf(const T_n& n,
   return ops_partials.build(logp);
 }
 
-template <typename T_n, typename T_shape, typename T_inv_scale>
+template <typename T_n, typename T_shape, typename T_inv_scale,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_shape, T_inv_scale> neg_binomial_lpmf(
     const T_n& n, const T_shape& alpha, const T_inv_scale& beta) {
   return neg_binomial_lpmf<false>(n, alpha, beta);

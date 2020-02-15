@@ -41,10 +41,10 @@ TEST(ProbBernoulliLogitScal, log_matches_lpmf) {
                   (stan::math::bernoulli_logit_log<true>(n, theta)));
   EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<false>(n, theta)),
                   (stan::math::bernoulli_logit_log<false>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<true, double>(n, theta)),
-                  (stan::math::bernoulli_logit_log<true, double>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<false, double>(n, theta)),
-                  (stan::math::bernoulli_logit_log<false, double>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<double>(n, theta)),
-                  (stan::math::bernoulli_logit_log<double>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<true, int>(n, theta)),
+                  (stan::math::bernoulli_logit_log<true, int>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<false, int>(n, theta)),
+                  (stan::math::bernoulli_logit_log<false, int>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_logit_lpmf<int>(n, theta)),
+                  (stan::math::bernoulli_logit_log<int>(n, theta)));
 }

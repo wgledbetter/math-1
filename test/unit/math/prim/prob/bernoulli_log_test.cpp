@@ -11,10 +11,10 @@ TEST(ProbBernoulli, log_matches_lpmf) {
                   (stan::math::bernoulli_log<true>(n, theta)));
   EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<false>(n, theta)),
                   (stan::math::bernoulli_log<false>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<true, double>(n, theta)),
-                  (stan::math::bernoulli_log<true, double>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<false, double>(n, theta)),
-                  (stan::math::bernoulli_log<false, double>(n, theta)));
-  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<double>(n, theta)),
-                  (stan::math::bernoulli_log<double>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<true, int>(n, theta)),
+                  (stan::math::bernoulli_log<true, int>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<false, int>(n, theta)),
+                  (stan::math::bernoulli_log<false, int>(n, theta)));
+  EXPECT_FLOAT_EQ((stan::math::bernoulli_lpmf<int>(n, theta)),
+                  (stan::math::bernoulli_log<int>(n, theta)));
 }

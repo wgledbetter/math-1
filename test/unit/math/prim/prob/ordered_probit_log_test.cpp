@@ -15,11 +15,11 @@ TEST(ProbOrderedProbit, log_matches_lpmf) {
                   (stan::math::ordered_probit_log<false>(3, lambda, c)));
   EXPECT_FLOAT_EQ(
       (stan::math::ordered_probit_lpmf<true, double, double>(3, lambda, c)),
-      (stan::math::ordered_probit_log<true, double, double>(3, lambda, c)));
+      (stan::math::ordered_probit_log<true, int, double>(3, lambda, c)));
   EXPECT_FLOAT_EQ(
       (stan::math::ordered_probit_lpmf<false, double, double>(3, lambda, c)),
-      (stan::math::ordered_probit_log<false, double, double>(3, lambda, c)));
+      (stan::math::ordered_probit_log<false, int, double>(3, lambda, c)));
   EXPECT_FLOAT_EQ(
       (stan::math::ordered_probit_lpmf<double, double>(3, lambda, c)),
-      (stan::math::ordered_probit_log<double, double>(3, lambda, c)));
+      (stan::math::ordered_probit_log<int, double>(3, lambda, c)));
 }

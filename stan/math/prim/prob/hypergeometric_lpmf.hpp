@@ -13,7 +13,8 @@ namespace math {
 // Hypergeometric(n|N, a, b)  [0 <= n <= a;  0 <= N-n <= b;  0 <= N <= a+b]
 // n: #white balls drawn;  N: #balls drawn;
 // a: #white balls;  b: #black balls
-template <bool propto, typename T_n, typename T_N, typename T_a, typename T_b>
+template <bool propto, typename T_n, typename T_N, typename T_a, typename T_b,
+          typename = require_all_same_st<int, T_n, T_N, T_a, T_b>>
 double hypergeometric_lpmf(const T_n& n, const T_N& N, const T_a& a,
                            const T_b& b) {
   static const char* function = "hypergeometric_lpmf";
@@ -53,7 +54,8 @@ double hypergeometric_lpmf(const T_n& n, const T_N& N, const T_a& a,
   return logp;
 }
 
-template <typename T_n, typename T_N, typename T_a, typename T_b>
+template <typename T_n, typename T_N, typename T_a, typename T_b,
+          typename = require_all_same_st<int, T_n, T_N, T_a, T_b>>
 inline double hypergeometric_lpmf(const T_n& n, const T_N& N, const T_a& a,
                                   const T_b& b) {
   return hypergeometric_lpmf<false>(n, N, a, b);

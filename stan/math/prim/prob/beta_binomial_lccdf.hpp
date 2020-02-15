@@ -38,7 +38,8 @@ namespace math {
  * @throw std::domain_error if N, alpha, or beta fails to be positive
  * @throw std::invalid_argument if container sizes mismatch
  */
-template <typename T_n, typename T_N, typename T_size1, typename T_size2>
+template <typename T_n, typename T_N, typename T_size1, typename T_size2,
+          typename = require_all_same_st<int, T_n, T_N>>
 return_type_t<T_size1, T_size2> beta_binomial_lccdf(const T_n& n, const T_N& N,
                                                     const T_size1& alpha,
                                                     const T_size2& beta) {

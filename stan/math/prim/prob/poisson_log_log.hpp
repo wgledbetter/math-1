@@ -10,7 +10,8 @@ namespace math {
 /** \ingroup prob_dists
  * @deprecated use <code>poisson_log_lpmf</code>
  */
-template <bool propto, typename T_n, typename T_log_rate>
+template <bool propto, typename T_n, typename T_log_rate,
+          typename = require_all_same_st<int, T_n>>
 return_type_t<T_log_rate> poisson_log_log(const T_n& n,
                                           const T_log_rate& alpha) {
   return poisson_log_lpmf<propto, T_n, T_log_rate>(n, alpha);
@@ -19,7 +20,8 @@ return_type_t<T_log_rate> poisson_log_log(const T_n& n,
 /** \ingroup prob_dists
  * @deprecated use <code>poisson_log_lpmf</code>
  */
-template <typename T_n, typename T_log_rate>
+template <typename T_n, typename T_log_rate,
+          typename = require_all_same_st<int, T_n>>
 inline return_type_t<T_log_rate> poisson_log_log(const T_n& n,
                                                  const T_log_rate& alpha) {
   return poisson_log_lpmf<T_n, T_log_rate>(n, alpha);

@@ -184,7 +184,7 @@ TEST(ProbDistributionsNegBinomial2Log, chiSquareGoodnessFitTest3) {
 }
 
 TEST(ProbNegBinomial2, log_matches_lpmf) {
-  double y = 0.8;
+  int y = 1;
   double mu = 1.1;
   double phi = 2.3;
 
@@ -195,18 +195,14 @@ TEST(ProbNegBinomial2, log_matches_lpmf) {
   EXPECT_FLOAT_EQ((stan::math::neg_binomial_2_lpmf<false>(y, mu, phi)),
                   (stan::math::neg_binomial_2_log<false>(y, mu, phi)));
   EXPECT_FLOAT_EQ(
-      (stan::math::neg_binomial_2_lpmf<true, double, double, double>(y, mu,
-                                                                     phi)),
-      (stan::math::neg_binomial_2_log<true, double, double, double>(y, mu,
-                                                                    phi)));
+      (stan::math::neg_binomial_2_lpmf<true, int, double, double>(y, mu, phi)),
+      (stan::math::neg_binomial_2_log<true, int, double, double>(y, mu, phi)));
   EXPECT_FLOAT_EQ(
-      (stan::math::neg_binomial_2_lpmf<false, double, double, double>(y, mu,
-                                                                      phi)),
-      (stan::math::neg_binomial_2_log<false, double, double, double>(y, mu,
-                                                                     phi)));
+      (stan::math::neg_binomial_2_lpmf<false, int, double, double>(y, mu, phi)),
+      (stan::math::neg_binomial_2_log<false, int, double, double>(y, mu, phi)));
   EXPECT_FLOAT_EQ(
-      (stan::math::neg_binomial_2_lpmf<double, double, double>(y, mu, phi)),
-      (stan::math::neg_binomial_2_log<double, double, double>(y, mu, phi)));
+      (stan::math::neg_binomial_2_lpmf<int, double, double>(y, mu, phi)),
+      (stan::math::neg_binomial_2_log<int, double, double>(y, mu, phi)));
 }
 
 TEST(ProbDistributionsNegBinomial2Log, neg_binomial_2_log_grid_test) {
