@@ -421,7 +421,8 @@ class AgradDistributionTestFixture : public ::testing::Test {
     }
   }
 
-  void test_finite_diff() {
+  template <bool B = all_constant<T0, T1, T2, T3, T4, T5>::value || any_vector<T0, T1, T2, T3, T4, T5>::value>
+  typename std::enable_if<B, void>::type test_finite_diff() {
     if (all_constant<T0, T1, T2, T3, T4, T5>::value) {
       SUCCEED() << "No test for all double arguments";
       return;
@@ -430,7 +431,10 @@ class AgradDistributionTestFixture : public ::testing::Test {
       SUCCEED() << "No test for vector arguments";
       return;
     }
+  }
 
+  template<bool B = all_constant<T0, T1, T2, T3, T4, T5>::value || any_vector<T0, T1, T2, T3, T4, T5>::value>
+  typename std::enable_if<!B, void>::type test_finite_diff() {
     vector<double> log_prob;
     vector<vector<double>> parameters;
     TestClass.valid_values(parameters, log_prob);
