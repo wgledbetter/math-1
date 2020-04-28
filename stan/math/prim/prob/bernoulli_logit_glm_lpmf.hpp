@@ -21,6 +21,7 @@ namespace math {
  * compute a more efficient version of bernoulli_logit_lpmf(y, alpha + x * beta)
  * by using analytically simplified gradients.
  * If containers are supplied, returns the log sum of the probabilities.
+ *
  * @tparam T_y type of binary vector of dependent variables (labels);
  * this can also be a single binary value;
  * @tparam T_x_scalar type of a scalar in the matrix of independent variables
@@ -30,8 +31,8 @@ namespace math {
  * @tparam T_alpha type of the intercept(s);
  * this can be a vector (of the same length as y) of intercepts or a single
  * value (for models with constant intercept);
- * @tparam T_beta type of the weight vector;
- * this can also be a single value;
+ * @tparam T_beta type of the weight vector
+ *
  * @param y binary scalar or vector parameter. If it is a scalar it will be
  * broadcast - used for all instances.
  * @param x design matrix or row vector. If it is a row vector it will be
@@ -49,14 +50,11 @@ template <bool propto, typename T_y, typename T_x_scalar, int T_x_rows,
 return_type_t<T_x_scalar, T_alpha, T_beta> bernoulli_logit_glm_lpmf(
     const T_y &y, const Eigen::Matrix<T_x_scalar, T_x_rows, Eigen::Dynamic> &x,
     const T_alpha &alpha, const T_beta &beta) {
-  static const char *function = "bernoulli_logit_glm_lpmf";
-
   using Eigen::Array;
   using Eigen::Dynamic;
-  using Eigen::Matrix;
   using Eigen::log1p;
+  using Eigen::Matrix;
   using std::exp;
-
   using T_partials_return = partials_return_t<T_y, T_x_scalar, T_alpha, T_beta>;
   using T_y_val =
       typename std::conditional_t<is_vector<T_y>::value,
@@ -69,6 +67,7 @@ return_type_t<T_x_scalar, T_alpha, T_beta> bernoulli_logit_glm_lpmf(
   const size_t N_instances = T_x_rows == 1 ? stan::math::size(y) : x.rows();
   const size_t N_attributes = x.cols();
 
+  static const char *function = "bernoulli_logit_glm_lpmf";
   check_consistent_size(function, "Vector of dependent variables", y,
                         N_instances);
   check_consistent_size(function, "Weight vector", beta, N_attributes);

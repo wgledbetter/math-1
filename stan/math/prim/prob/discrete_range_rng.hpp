@@ -34,11 +34,9 @@ template <typename T_lower, typename T_upper, class RNG,
           typename = require_all_same_st<int, T_lower, T_upper>>
 inline typename VectorBuilder<true, int, T_lower, T_upper>::type
 discrete_range_rng(const T_lower& lower, const T_upper& upper, RNG& rng) {
-  using boost::random::uniform_int_distribution;
-  using boost::variate_generator;
-
   static const char* function = "discrete_range_rng";
-
+  using boost::variate_generator;
+  using boost::random::uniform_int_distribution;
   check_consistent_sizes(function, "Lower bound parameter", lower,
                          "Upper bound parameter", upper);
   check_greater_or_equal(function, "Upper bound parameter", upper, lower);

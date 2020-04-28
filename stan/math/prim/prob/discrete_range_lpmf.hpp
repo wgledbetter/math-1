@@ -45,18 +45,16 @@ template <bool propto, typename T_y, typename T_lower, typename T_upper,
           typename = require_all_same_st<int, T_y, T_lower, T_upper>>
 double discrete_range_lpmf(const T_y& y, const T_lower& lower,
                            const T_upper& upper) {
-  static const char* function = "discrete_range_lpmf";
   using std::log;
-
-  if (size_zero(y, lower, upper)) {
-    return 0.0;
-  }
-
+  static const char* function = "discrete_range_lpmf";
   check_not_nan(function, "Random variable", y);
   check_consistent_sizes(function, "Lower bound parameter", lower,
                          "Upper bound parameter", upper);
   check_greater_or_equal(function, "Upper bound parameter", upper, lower);
 
+  if (size_zero(y, lower, upper)) {
+    return 0.0;
+  }
   if (!include_summand<propto>::value) {
     return 0.0;
   }

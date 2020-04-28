@@ -23,7 +23,7 @@ template <typename T_y, typename T_lower, typename T_upper,
           typename = require_all_same_st<int, T_y, T_lower, T_upper>>
 inline double discrete_range_log(const T_y& y, const T_lower& lower,
                                  const T_upper& upper) {
-  return discrete_range_lpmf<T_y, T_lower, T_upper>(y, lower, upper);
+  return discrete_range_lpmf(y, lower, upper);
 }
 
 }  // namespace math
