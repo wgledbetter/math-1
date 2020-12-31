@@ -383,9 +383,14 @@ def benchmark(
             benchmark_name = function_name
             setup = ""
             var_conversions = ""
-            code = "    auto res = stan::math::eval(stan::math::{}(".format(
-                function_name
-            )
+            if opencl in ("copy", "copy_rev") and return_type not in scalar_stan_types:
+                code = "    auto res = stan::math::from_matrix_cl(stan::math::{}(".format(
+                    function_name
+                )
+            else:
+                code = "    auto res = stan::math::eval(stan::math::{}(".format(
+                    function_name
+                )
             for (
                     n,
                     (arg_overload, cpp_arg_template, stan_arg),
@@ -401,6 +406,8 @@ def benchmark(
                 arg_type = cpp_arg_template.replace("SCALAR", scalar)
                 var_name = "arg" + str(n)
                 make_arg_function = "make_arg"
+                is_argument_autodiff = "var" in arg_type
+                is_argument_scalar = stan_arg in scalar_stan_types
                 value = 0.4
                 if function_name in special_arg_values:
                     if isinstance(special_arg_values[function_name][n], str):
@@ -419,16 +426,17 @@ def benchmark(
                             value,
                         )
                     )
-                    if opencl == "base":
-                        setup += "  auto {} = stan::math::to_matrix_cl({});\n".format(
-                            var_name + "_cl", var_name
-                        )
-                        var_name += "_cl"
-                    elif varmat == "base" and arg_overload == "Rev":
-                        setup += "  auto {} = stan::math::to_var_value({});\n".format(
-                            var_name + "_varmat", var_name
-                        )
-                        var_name += "_varmat"
+                    if not is_argument_scalar:
+                        if opencl == "base" or opencl == "copy_rev":
+                            setup += "  auto {} = stan::math::to_matrix_cl({});\n".format(
+                                var_name + "_cl", var_name
+                            )
+                            var_name += "_cl"
+                        elif varmat == "base" and arg_overload == "Rev":
+                            setup += "  auto {} = stan::math::to_var_value({});\n".format(
+                                var_name + "_varmat", var_name
+                            )
+                            var_name += "_varmat"
                 else:
                     var_conversions += (
                         "    {} {} = stan::test::{}<{}>({}, state.range(0));\n".format(
@@ -439,25 +447,26 @@ def benchmark(
                             value,
                         )
                     )
-                    if opencl == "base":
-                        var_conversions += (
-                            "    auto {} = stan::math::to_matrix_cl({});\n".format(
-                                var_name + "_cl", var_name
+                    if not is_argument_scalar:
+                        if opencl == "base" or (opencl == "copy_rev" and not is_argument_autodiff):
+                            var_conversions += (
+                                "    auto {} = stan::math::to_matrix_cl({});\n".format(
+                                    var_name + "_cl", var_name
+                                )
                             )
-                        )
-                        var_name += "_cl"
-                    elif varmat == "base" and arg_overload == "Rev":
-                        var_conversions += (
-                            "    auto {} = stan::math::to_var_value({});\n".format(
-                                var_name + "_varmat", var_name
+                            var_name += "_cl"
+                        elif varmat == "base" and arg_overload == "Rev":
+                            var_conversions += (
+                                "    auto {} = stan::math::to_var_value({});\n".format(
+                                    var_name + "_varmat", var_name
+                                )
                             )
-                        )
-                        var_name += "_varmat"
-                if opencl == "copy" and stan_arg not in ("int", "real"):
+                            var_name += "_varmat"
+                if (opencl == "copy" or opencl == "copy_rev" and is_argument_autodiff) and not is_argument_scalar:
                     code += "stan::math::to_matrix_cl({}), ".format(var_name)
                 elif (
                         varmat == "copy"
-                        and stan_arg not in ("int", "real")
+                        and not is_argument_scalar
                         and arg_overload == "Rev"
                 ):
                     code += "stan::math::to_var_value({}), ".format(var_name)
@@ -688,7 +697,8 @@ def processCLIArgs():
         default=False,
         help="Benchmark OpenCL overloads. Possible values: "
              "base - benchmark just the execution time, "
-             "copy - include argument copying time",
+             "copy - include argument copying time"
+             "copy_rev - include argument copying time for var arguments only",
     )
     parser.add_argument(
         "--varmat",
